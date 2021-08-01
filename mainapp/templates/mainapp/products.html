@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+
 {% include 'geekshop/includes/inc_main_menu.html' %}
 <div class="details">
     {% include 'mainapp/includes/inc_category_menu.html' %}
@@ -9,21 +10,21 @@
     <div class="details-products">
         <div class="details-slider">
             <div class="slider-product">
-                <img src="{% static 'geekshop/img/slider1.jpg' %}">
+                <img src="/static/geekshop/img/slider1.jpg">
             </div>
             <div class="slider-control">
                 <div class="block">
-                    <a href="#"><img src="{% static 'geekshop/img/controll.jpg' %}" alt="">
+                    <a href="#"><img src="/static/geekshop/img/controll.jpg" alt="">
                         <div class="text"></div>
                     </a>
                 </div>
                 <div class="block">
-                    <a href="#"><img src="{% static 'geekshop/img/controll1.jpg' %}" alt="">
+                    <a href="#"><img src="/static/geekshop/img/controll1.jpg" alt="">
                         <div class="text"></div>
                     </a>
                 </div>
                 <div class="block">
-                    <a href="#"><img src="{% static 'geekshop/img/controll2.jpg' %}" alt="">
+                    <a href="#"><img src="/static/geekshop/img/controll2.jpg" alt="">
                         <div class="text"></div>
                     </a>
                 </div>
@@ -48,24 +49,49 @@
         </div>
     </div>
 
+    <div class="products_list" style="margin-top: 50px;">
+    {% if category %}
+      <div class="title clearfix">
+        <h2>
+          Категория: "{{ category.name|title }}"
+        </h2>
+      </div>
+    {% endif %}
+        <div class="related-products" style="display: flex; justify-content: center; margin-top: 20px;">
+        {% for product in products %}
+        <div class="block">
+            <a href="{% url 'basket:add' product.pk %}"><img src="/media/{{ product.image }}" alt="">
+                <div class="text">
+                    <img src="/static/geekshop/img/icon-hover.png" alt="img">
+                    <h4>{{ product.name }}</h4>
+                    <p>{{ product.short_desc }} </p>
+                    <p>{{ product.category.name }} </p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+
     <div class="related">
         <div class="title clearfix">
             <h2>Похожие продукты</h2>
-            <a class="explore" href="#">показать все <img src="{% static 'geekshop/img/arrow.png' %}" alt=""></a>
+            <a class="explore" href="#">показать все <img src="/static/geekshop/img/arrow.png" alt=""></a>
         </div>
         <div class="related-products clearfix">
-            {% for products in related_products %}
+            {% for product in related_products %}
             <div class="block">
-                <a href="#"><img src="/media/{{ products.image }}" alt="{{ product.short_desc }}">
+                <a href="#"><img src="/media/{{ product.image }}" alt="">
                     <div class="text">
-                        <img src="{% static 'geekshop/img/icon-hover.png' %}" alt="img">
+                        <img src="/static/geekshop/img/icon-hover.png" alt="img">
                         <h4>{{ product.name }}</h4>
-                        <p>{{ products.description }}</p>
+                        <p>{{ product.short_desc }} </p>
+                        <p>{{ product.category.name }} </p>
                     </div>
                 </a>
             </div>
-            {% endfor %}
 
+            {% endfor %}
         </div>
     </div>
 </div>

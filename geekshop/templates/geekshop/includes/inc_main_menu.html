@@ -8,8 +8,15 @@
         <li>
             <a href="{% url 'auth:edit' %}">
                 {{ user.first_name|default:'Пользователь' }}
+
+            </a>
+            <a href="{% url 'basket:view' %}" >
+                <span>
+                    {% if basket %} ({{ basket|length }}) {% endif %}
+                </span>
             </a>
         </li>
+
         {% endif %}
         <li>
             {% if user.is_authenticated %}
