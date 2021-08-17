@@ -7,8 +7,9 @@
 
 {% block content %}
 
-		<div class="details">
-			{% include 'mainapp/includes/inc_category_menu.html' %}
+{% include 'geekshop/includes/inc_main_menu.html' %}
+<div class="details">
+    {% include 'mainapp/includes/inc_category_menu.html' %}
 
 			<div class="details-products">
 				<div class="details-slider d-flex">
@@ -46,47 +47,47 @@
 					</div>
 				</div>
 			</div>
-            {% if products %}
-            <div class="featured mt-5">
-                {% if category %}
-                    <h2>Категория: {{ category.name|title }}</h2>
-                {% endif %}
-                <div class="paginator">
-                  {% if products.has_previous %}
-                    <a href="{% url 'products:page' category.pk products.previous_page_number %}">
-                      <
-                    </a>
-                  {% endif %}
-                  <span class="current">
-                    страница {{ products.number }} из
-                    {{ products.paginator.num_pages }}
-                  </span>
-                  {% if products.has_next %}
-                    <a href="{% url 'products:page' category.pk products.next_page_number %}">
-                      >
-                    </a>
-                  {% endif %}
-                </div>
-                <div class="featured-menu">
-                    <a class="active" href="#">Популярные</a><a href="#">Новинки</a>
-                </div>
-                <a class="explore" href="#">показать все <img src="{% static 'geekshop/img/arrow.png' %}" alt=""></a>
-                <div class="clearfix">
-                </div>
-                <div class="tab-content">
-                    {% for product in products %}
-                        <div class="block">
-                            <a href="{% url 'products:product' product.pk %}"><img src="/media/{{product.image}}" alt="">
-                                <div class="text">
-                                    <img src="{% static 'geekshop/img/icon-hover.png' %}" alt="img">
-                                    <h4>{{product.name}}</h4>
-                                    <p>{{product.short_desc}}. </p>
-                                </div>
-                            </a>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
+		{% if products %}
+		<div class="featured mt-5">
+			{% if category %}
+				<h2>Категория: {{ category.name|title }}</h2>
+			{% endif %}
+			<div class="paginator">
+			  {% if products.has_previous %}
+				<a href="{% url 'products:page' category.pk products.previous_page_number %}">
+				  <
+				</a>
+			  {% endif %}
+			  <span class="current">
+				страница {{ products.number }} из
+				{{ products.paginator.num_pages }}
+			  </span>
+			  {% if products.has_next %}
+				<a href="{% url 'products:page' category.pk products.next_page_number %}">
+				  >
+				</a>
+			  {% endif %}
+			</div>
+			<div class="featured-menu">
+				<a class="active" href="#">Популярные</a><a href="#">Новинки</a>
+			</div>
+			<a class="explore" href="#">показать все <img src="{% static 'geekshop/img/arrow.png' %}" alt=""></a>
+			<div class="clearfix">
+			</div>
+			<div class="tab-content">
+				{% for product in products %}
+					<div class="block">
+						<a href="{% url 'products:product' product.pk %}"><img src="/media/{{product.image}}" alt="">
+							<div class="text">
+								<img src="{% static 'geekshop/img/icon-hover.png' %}" alt="img">
+								<h4>{{product.name}}</h4>
+								<p>{{product.short_desc}}. </p>
+							</div>
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
 
 			<div class="related">
 				<div class="title clearfix">
