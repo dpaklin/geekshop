@@ -39,9 +39,9 @@ def save_user_profile(backend, user, response, *args, **kwargs):
             user.delete()
             raise AuthForbidden('social_core.backends.vk.VKOAuth2')
 
-    if data['photo_max_orig']:
-        print(data['photo_max_orig'])
-        urllib.request.urlretrieve(data['photo_max_orig'], f'{settings.MEDIA_ROOT}/users_avatars/{user.pk}.jpg')
-        user.avatar = f'users_avatars/{user.pk}.jpg'
+    # if data['photo_max_orig']:
+    #     print(data['photo_max_orig'])
+    #     urllib.request.urlretrieve(data['photo_max_orig'], f'{settings.MEDIA_ROOT}/users_avatars/{user.pk}.jpg')
+    #     user.avatar = f'users_avatars/{user.pk}.jpg'
 
     user.save()
