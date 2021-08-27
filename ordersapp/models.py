@@ -13,6 +13,7 @@ class OrderItemQuerySet(models.QuerySet):
 
 
 class Order(models.Model):
+
     FORMING = 'FM'
     SENT_TO_PROCEED = 'STP'
     PROCEEDED = 'PRD'
