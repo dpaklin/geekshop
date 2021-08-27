@@ -14,6 +14,8 @@ class ProductCategory(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    is_deleted = models.BooleanField(default=False)
+
     def __str__(self):
         return self.name
 
@@ -56,6 +58,9 @@ class Product(models.Model):
         default=0,
     )
 
+    is_deleted = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+
     def __str__(self):
         return f'{self.name} - {self.pk}'
 
@@ -63,3 +68,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
+
+    @staticmethod
+    def get_items():
+        return Product.objects.filter(is_active=True).order_by('category', 'name')
