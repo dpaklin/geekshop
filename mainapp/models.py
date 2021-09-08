@@ -15,6 +15,7 @@ class ProductCategory(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     is_deleted = models.BooleanField(default=False)
+
     is_active = models.BooleanField(db_index=True, default=True)
 
     def __str__(self):

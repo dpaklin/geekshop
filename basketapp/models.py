@@ -4,6 +4,9 @@ from django.db import models
 from mainapp.models import Product
 from ordersapp.models import OrderItem
 
+from django.utils.functional import cached_property
+
+
 
 class BasketQuerySet(models.QuerySet):
     def delete(self, *args, **kwargs):
@@ -35,6 +38,10 @@ class Basket(models.Model):
         auto_now_add=True,
     )
 
+    @cached_property
+    def get_items_cached(self):
+        return self.user.basket.select_related()
+
     @staticmethod
     def get_item(pk):
         return Basket.objects.filter(pk=pk).first()
@@ -45,13 +52,13 @@ class Basket(models.Model):
 
     @property
     def total_quantity(self):
-        items = Basket.objects.filter(user=self.user)
+        items = self.get_items_cached
         totalquantity = sum(list(map(lambda x: x.quantity, items)))
         return totalquantity
 
     @property
     def total_cost(self):
-        items = Basket.objects.filter(user=self.user)
+        items = self.get_items_cached
         totalcost = sum(list(map(lambda x: x.product_cost, items)))
         return totalcost
 
