@@ -15,6 +15,7 @@ class ProductCategory(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     is_deleted = models.BooleanField(default=False)
+    is_active = models.BooleanField(db_index=True, default=True)
 
     def __str__(self):
         return self.name
@@ -59,7 +60,7 @@ class Product(models.Model):
     )
 
     is_deleted = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(db_index=True, default=True)
 
     def __str__(self):
         return f'{self.name} - {self.pk}'
